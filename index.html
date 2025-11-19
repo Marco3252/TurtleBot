@@ -80,6 +80,7 @@
 </head>
 <body>
 
+
 <!-- BARRA SUPERIOR -->
 <div id="titleBar">
   <div id="leftControls">
@@ -105,21 +106,19 @@
   Blockly.Blocks['avanzar'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Avanzar")
-        .appendField(new Blockly.FieldNumber(10, -1000, 1000), "NAME")
-        .appendField("cm");
+        .appendField("avanzar");
+    this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(30);
- this.setTooltip("avanza la distancia mostrada");
+ this.setTooltip("avanzar un bloque");
  this.setHelpUrl("");
   }
 };
 
 python.pythonGenerator.forBlock['avanzar'] = function(block, generator) {
-  var dis = block.getFieldValue('NAME');
   // TODO: Assemble python into code variable.
-  var code = 'avanzar(' + dis + ')\n';
+  var code = 'avanzar()\n';
   return code;
 };
 
@@ -128,21 +127,19 @@ python.pythonGenerator.forBlock['avanzar'] = function(block, generator) {
 Blockly.Blocks['retroceder'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Retroceder")
-        .appendField(new Blockly.FieldNumber(10, -1000, 1000), "NAME")
-        .appendField("cm");
+        .appendField("Retroceder");
+    this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(30);
- this.setTooltip("retrocede la distancia mostrada");
+ this.setTooltip("retroceder un bloque");
  this.setHelpUrl("");
   }
 };
 
 python.pythonGenerator.forBlock['retroceder'] = function(block, generator) {
-  var dist = block.getFieldValue('NAME');
   // TODO: Assemble python into code variable.
-  var code = 'retroceder(' + dist + ')\n';
+  var code = 'retroceder()  \n';
   return code;
 };
 
@@ -152,23 +149,18 @@ Blockly.Blocks['girar_izq'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("girar a la izquierda");
-    this.appendDummyInput()
-        .setAlign(Blockly.ALIGN_CENTRE)
-        .appendField(new Blockly.FieldNumber(90, -360, 360), "NAME")
-        .appendField("grados ⟲");
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(30);
- this.setTooltip("Gira a la izquierda los grados indicados");
+ this.setTooltip("Gira a la izquierda");
  this.setHelpUrl("");
   }
-};
+};   
 
 python.pythonGenerator.forBlock['girar_izq'] = function(block, generator) {
-  var ang = block.getFieldValue('NAME');
   // TODO: Assemble python into code variable.
-  var code = 'girar_izquierda('+ ang +')\n';
+  var code = 'girar_izquierda()\n';
   return code;
 };
 
@@ -178,10 +170,6 @@ Blockly.Blocks['girar_der'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("girar a la derecha");
-    this.appendDummyInput()
-        .setAlign(Blockly.ALIGN_CENTRE)
-        .appendField(new Blockly.FieldNumber(90, -360, 360), "NAME")
-        .appendField("grados ⟳");
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -192,9 +180,8 @@ Blockly.Blocks['girar_der'] = {
 };
 
 python.pythonGenerator.forBlock['girar_der'] = function(block, generator) {
-  var ang = block.getFieldValue('NAME');
   // TODO: Assemble python into code variable.
-  var code = 'girar_derecha('+ ang + ')\n';
+  var code = 'girar_derecha() \n';
   return code;
 };
   /* ----- WORKSPACE ----- */
