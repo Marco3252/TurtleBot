@@ -52,6 +52,7 @@
   #blocklyArea {
     flex: 1;
     overflow: hidden;
+    height: 100%;
   }
 
   /* Botón ejecutar */
@@ -59,7 +60,7 @@
     width: 100%;
     padding: 15px;
     font-size: 20px;
-    background: #2ecc71;
+    background: #6ecfda;
     color: white;
     border: none;
     /*position:fixed;
@@ -94,19 +95,12 @@
     <button id="connectBtn">Conectar</button>
   </div>
 </div>
+<!-- Ejecutar -->
+<button id="runBtn">▶ Ejecutar</button>
+<div id="overlay">Ejecutando...</div>
 
 <!-- Blockly workspace -->
 <div id="blocklyArea"></div>
-
-<table border="0px">
-  <tr>
-    <td>
-      <!-- Ejecutar -->
-      <button id="runBtn">▶ Ejecutar</button>
-      <div id="overlay">Ejecutando...</div>
-    </td>
-  </tr>
-</table>
 
 
 <script>
