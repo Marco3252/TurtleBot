@@ -66,20 +66,38 @@
     bottom: 0;*/
   }
 
-  /* Overlay */
-  #overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    font-size: 30px;
-    display: none; 
-    justify-content: center; 
-    align-items: center;
-    z-index: 9999;
-  }
+  /* Pantalla que bloquea toda la página */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* oscurece todo */
+  display: flex;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* encima de todo */
+}
+
+/* Animación circular */
+.loader {
+  border: 6px solid #ffffff33;
+  border-top: 6px solid #3498db;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 </style>
 </head>
+<div id="log" style="display:none; color:white; padding:10px; font-family:monospace;"></div>
 <body>
 
 
@@ -98,165 +116,12 @@
 <button id="runBtn">▶ Ejecutar</button>
 <div id="overlay">Ejecutando...</div>
 
-<!-- Blockly workspace -->
 <div id="blocklyArea"></div>
 
 
-<script>
-
-  /* ----- BLOQUE AVANZAR ----- */
-  Blockly.Blocks['avanzar'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("avanzar");
-    this.setInputsInline(false);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(30);
- this.setTooltip("avanzar un bloque");
- this.setHelpUrl("");
-  }
-};
-
-python.pythonGenerator.forBlock['avanzar'] = function(block, generator) {
-  // TODO: Assemble python into code variable.
-  var code = 'avanzar()\n';
-  return code;
-};
-
-/* ------- Bloque retroceder ------------- */
-
-Blockly.Blocks['retroceder'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Retroceder");
-    this.setInputsInline(false);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(30);
- this.setTooltip("retroceder un bloque");
- this.setHelpUrl("");
-  }
-};
-
-python.pythonGenerator.forBlock['retroceder'] = function(block, generator) {
-  // TODO: Assemble python into code variable.
-  var code = 'retroceder()  \n';
-  return code;
-};
-
-/* --- bloque girar ---- */
-
-Blockly.Blocks['girar_izq'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("girar a la izquierda");
-    this.setInputsInline(false);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(30);
- this.setTooltip("Gira a la izquierda");
- this.setHelpUrl("");
-  }
-};   
-
-python.pythonGenerator.forBlock['girar_izq'] = function(block, generator) {
-  // TODO: Assemble python into code variable.
-  var code = 'girar_izquierda()\n';
-  return code;
-};
-
-/* --- bloque girar derecha --- */
-
-Blockly.Blocks['girar_der'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("girar a la derecha");
-    this.setInputsInline(false);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(30);
- this.setTooltip("Gira a la derecha los grados indicados");
- this.setHelpUrl("");
-  }
-};
-
-python.pythonGenerator.forBlock['girar_der'] = function(block, generator) {
-  // TODO: Assemble python into code variable.
-  var code = 'girar_derecha() \n';
-  return code;
-};
-  /* ----- WORKSPACE ----- */
-  const blocklyArea = document.getElementById("blocklyArea");
-
-  const workspace = Blockly.inject(blocklyArea, {
-    toolbox: `
-      <xml xmlns="https://developers.google.com/blockly/xml">
-        <block type="avanzar"></block>
-        <block type="retroceder"></block>
-        <block type="girar_izq"></block>
-        <block type="girar_der"></block>
-        <block type="controls_repeat_ext">
-          <value name="TIMES">
-            <shadow type="math_number">
-              <field name="NUM">1</field>
-            </shadow>
-          </value>
-        </block>
-      </xml>
-    `,
-    scrollbars: true,
-    trashcan: true,
-    locale: Blockly.Msg,
-    zoom: {
-      controls: true,
-      wheel: true,
-      startScale: 0.7,
-      maxScale: 3,
-      minScale: 0.3
-    },
-    move: {
-      wheel: true,
-      drag: true
-    }
-  });
-
-
-  /* ----- CONECTAR / DESCONECTAR ----- */
-  const connectBtn = document.getElementById("connectBtn");
-  let conectado = false;
-
-  connectBtn.onclick = () => {
-    conectado = !conectado;
-
-    if (conectado) {
-      connectBtn.textContent = "Desconectar";
-      connectBtn.style.background = "#e74c3c";
-      connectBtn.style.color = "white";
-    } else {
-      connectBtn.textContent = "Conectar";
-      connectBtn.style.background = "#ffffff33";
-      connectBtn.style.color = "white";
-    }
-  };
-
-
-  /* ----- EJECUTAR ----- */
-  document.getElementById("runBtn").onclick = () => {
-    const overlay = document.getElementById("overlay");
-    overlay.style.display = "flex";
-
-    const code = Blockly.Python.workspaceToCode(workspace);
-    console.log(code);
-
-    setTimeout(() => {
-      overlay.style.display = "none";
-    }, 2000);
-  };
-
-</script>
-
+<script src="f.js"></script>
+<div id="overlay" style="display:none;">
+  <div class="loader"></div>
+</div>
 </body>
 </html>
-
-
